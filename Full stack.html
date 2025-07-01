@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Adolph - Official Website</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #1a1a2e;
+            --accent-color: #16213e;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --gradient-1: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            --gradient-2: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --neon-glow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--secondary-color);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(26, 26, 46, 0.98);
+            box-shadow: 0 2px 20px rgba(255, 107, 53, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            text-shadow: var(--neon-glow);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="waves" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M0,50 Q25,0 50,50 T100,50" stroke="%23ff6b35" stroke-width="2" fill="none" opacity="0.3"/></pattern></defs><rect width="100%" height="100%" fill="%23161e2e"/><rect width="100%" height="100%" fill="url(%23waves)"/></svg>') center/cover;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--gradient-1);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: var(--neon-glow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 10%; left: 20%; animation-delay: 4s; }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+            filter: drop-shadow(var(--neon-glow));
+        }
+
+        /* Booking Section */
+        .booking-section {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(22, 33, 62, 0.1));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 4rem 0;
+        }
+
+       .booking-form {
+    display: grid;
+    grid-template-columns: repeat(2, fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+
+        .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 1rem;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    appearance: none; /* Optional for custom style */
+}
+
+/* Ensure dropdown options are readable */
+.form-group select option {
+    color: #000; /* Dark text for visibility */
+    background-color: #fff; /* Light background */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--neon-glow);
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+        .submit-btn {
+            grid-column: 1 / -1;
+            padding: 1rem 2rem;
+            background: var(--gradient-1);
+            color: var(--text-light);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Analytics Dashboard */
+        .analytics-dashboard {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0.05));
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--accent-color);
+            padding: 3rem 0 1rem;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--neon-glow);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--secondary-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Music Visualizer */
+        .music-visualizer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            z-index: 1000;
+        }
+
+        .visualizer-bar {
+            width: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+            animation: musicBeat 1s ease-in-out infinite alternate;
+        }
+
+        .visualizer-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .visualizer-bar:nth-child(2) { height: 30px; animation-delay: 0.1s; }
+        .visualizer-bar:nth-child(3) { height: 25px; animation-delay: 0.2s; }
+        .visualizer-bar:nth-child(4) { height: 35px; animation-delay: 0.3s; }
+        .visualizer-bar:nth-child(5) { height: 20px; animation-delay: 0.4s; }
+
+        @keyframes musicBeat {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1); }
+        }
+    </style>
+</head>
+<body>
+
+<!------------------------------------------------------------------------------------------------------------------------------>
+<!-------------------------------------------------------------------------------------------------------------------------------->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">DJ Adolph</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#booking">Book Now</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-elements">
+            <div class="floating-element">🎵</div>
+            <div class="floating-element">🎧</div>
+            <div class="floating-element">🎤</div>
+        </div>
+        <div class="hero-content">
+            <h1>DJ Adolph</h1>
+            <p>Electrifying Beats, Unforgettable Nights</p>
+            <a href="#booking" class="cta-button">Book Your Event</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎉</div>
+                <h3>Wedding Events</h3>
+                <p>Make your special day unforgettable with our premium wedding DJ services. Custom playlists and romantic ambiance guaranteed.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3>Corporate Events</h3>
+                <p>Professional DJ services for corporate parties, conferences, and team building events. Sophisticated music for business occasions.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎂</div>
+                <h3>Private Parties</h3>
+                <p>Birthday parties, anniversaries, and intimate gatherings. Personalized music selection to match your celebration style.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌟</div>
+                <h3>Club Nights</h3>
+                <p>High-energy club sets and nightlife entertainment. Latest hits and underground tracks to keep the dance floor packed.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎭</div>
+                <h3>Festival Sets</h3>
+                <p>Large-scale festival performances and outdoor events. Professional sound systems and crowd-pleasing sets.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎼</div>
+                <h3>Music Production</h3>
+                <p>Custom remixes, original tracks, and music production services. Transform your vision into audio reality.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="section" id="booking">
+        <div class="booking-section">
+            <h2 class="section-title">Book Your Event</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Ready to make your event legendary? Fill out the form below and let's create something amazing together!</p>
+            
+            <form class="booking-form" id="bookingForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+
+         <div class="form-group">
+    <label for="event-type">Event Type</label>
+    <select id="event-type" name="event-type" required>
+        <option value="">Select Event Type</option>
+        <option value="wedding">Wedding</option>
+        <option value="corporate">Corporate Event</option>
+        <option value="private">Private Party</option>
+        <option value="club">Club Night</option>
+        <option value="festival">Festival</option>
+        <option value="other">Other</option>
+    </select>
+</div>
+
+                <div class="form-group">
+                    <label for="date">Event Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Event Time</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+                <div class="form-group">
+                    <label for="duration">Duration (hours)</label>
+                    <input type="number" id="duration" name="duration" min="1" max="12" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" name="guests" min="1" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="venue">Venue Address</label>
+                    <input type="text" id="venue" name="venue" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="special-requests">Special Requests</label>
+                    <textarea id="special-requests" name="special-requests" rows="4" placeholder="Tell us about your music preferences, special songs, or any other requirements..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Booking Request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard -->
+    <section class="section" id="analytics">
+        <h2 class="section-title">Performance Analytics</h2>
+        <div class="analytics-dashboard">
+            <div class="analytics-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalEvents">0</div>
+                    <div class="stat-label">Total Events</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="happyClients">0</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="hoursPlayed">0</div>
+                    <div class="stat-label">Hours Played</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="songsPlayed">0</div>
+                    <div class="stat-label">Songs Played</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="monthlyBookings">0</div>
+                    <div class="stat-label">Monthly Bookings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgRating">0.0</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <h3 style="margin-bottom: 1rem;">Get In Touch</h3>
+            <div class="social-links">
+                <a href="https://www.instagram.com/adolph_ata?igsh=MXQzMmFjMzU5Zmlj" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+            </div>
+            <p>Email: ado.musicdj@gmail.com | Phone: (961) 76 992 015</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">&copy; 2025 DJ Adolph. All rights reserved. | Created by Adolph Henri Atallah</p>
+        </div>
+    </footer>
+
+    <!-- Music Visualizer -->
+    <div class="music-visualizer">
+        <div class="visualizer-bar"></div>
+        <div class="visualizer-bar"></div>
+        <div class="visualizer-bar"></div>
+        <div class="visualizer-bar"></div>
+        <div class="visualizer-bar"></div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const navbar = document.getElementById('navbar');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Booking form handling
+        const bookingForm = document.getElementById('bookingForm');
+        let bookingData = [];
+
+        // Analytics functionality
+        const analytics = {
+            totalEvents: 247,
+            happyClients: 189,
+            hoursPlayed: 1340,
+            songsPlayed: 8920,
+            monthlyBookings: 23,
+            avgRating: 4.9
+        };
+
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    clearInterval(timer);
+                    start = target;
+                }
+                
+                if (element.id === 'avgRating') {
+                    element.textContent = start.toFixed(1);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+
+        function updateAnalytics() {
+            // Add new booking to analytics
+            if (bookingData.length > 0) {
+                analytics.monthlyBookings = bookingData.filter(booking => {
+                    const bookingMonth = new Date(booking.timestamp).getMonth();
+                    const currentMonth = new Date().getMonth();
+                    return bookingMonth === currentMonth;
+                }).length;
+                analytics.totalEvents = 247 + bookingData.length;
+            }
+            
+            // Animate counters when analytics section is visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(document.getElementById('totalEvents'), analytics.totalEvents);
+                        animateCounter(document.getElementById('happyClients'), analytics.happyClients);
+                        animateCounter(document.getElementById('hoursPlayed'), analytics.hoursPlayed);
+                        animateCounter(document.getElementById('songsPlayed'), analytics.songsPlayed);
+                        animateCounter(document.getElementById('monthlyBookings'), analytics.monthlyBookings);
+                        animateCounter(document.getElementById('avgRating'), analytics.avgRating);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            observer.observe(document.getElementById('analytics'));
+        }
+
+        function updateAnalyticsData() {
+            // Update analytics based on new bookings
+            analytics.totalEvents = 247 + bookingData.length;
+            analytics.monthlyBookings = bookingData.filter(booking => {
+                const bookingMonth = new Date(booking.timestamp).getMonth();
+                const currentMonth = new Date().getMonth();
+                return bookingMonth === currentMonth;
+            }).length;
+            
+            // Recalculate other metrics
+            const totalGuests = bookingData.reduce((sum, booking) => sum + booking.guests, 0);
+            const totalHours = bookingData.reduce((sum, booking) => sum + booking.duration, 0);
+            
+            analytics.happyClients = 189 + bookingData.length;
+            analytics.hoursPlayed = 1340 + totalHours;
+            analytics.songsPlayed = 8920 + (totalHours * 15); // Assuming 15 songs per hour
+        }
+
+        // Initialize analytics
+        updateAnalytics();
+
+        // Add entrance animations to service cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            cardObserver.observe(card);
+        });
+
+        // Dynamic date restriction (no past dates)
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // Add loading states and form validation
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+        });
+
+        function validateField(field) {
+            const value = field.value.trim();
+            const fieldType = field.type;
+            
+            // Remove existing validation classes
+            field.classList.remove('valid', 'invalid');
+            
+            if (field.hasAttribute('required') && !value) {
+                field.classList.add('invalid');
+                return false;
+            }
+            
+            // Email validation
+            if (fieldType === 'email' && value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    field.classList.add('invalid');
+                    return false;
+                }
+            }
+            
+            // Phone validation
+            if (fieldType === 'tel' && value) {
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                if (!phoneRegex.test(value.replace(/\s/g, ''))) {
+                    field.classList.add('invalid');
+                    return false;
+                }
+            }
+            
+            if (value) {
+                field.classList.add('valid');
+            }
+            return true;
+        }
+
+        // Enhanced booking form with real-time validation
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate all fields
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isValid = false;
+                }
+            });
+            
+            if (!isValid) {
+                alert('⚠️ Please fill in all required fields correctly.');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Processing...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                const formData = new FormData(bookingForm);
+                const booking = {
+                    id: Date.now(),
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    eventType: formData.get('event-type'),
+                    date: formData.get('date'),
+                    time: formData.get('time'),
+                    duration: parseInt(formData.get('duration')),
+                    guests: parseInt(formData.get('guests')),
+                    venue: formData.get('venue'),
+                    specialRequests: formData.get('special-requests'),
+                    status: 'confirmed',
+                    timestamp: new Date().toISOString()
+                };
+
+                bookingData.push(booking);
+                updateAnalyticsData();
+                
+                // Reset form and button
+                bookingForm.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Show detailed success message
+                showBookingConfirmation(booking);
+                
+            }, 2000);
+        });
+
+        function showBookingConfirmation(booking) {
+            const modal = document.createElement('div');
+            modal.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 10000;">
+                    <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 3rem; border-radius: 20px; max-width: 500px; text-align: center; border: 2px solid #ff6b35;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
+                        <h2 style="color: #ff6b35; margin-bottom: 1rem;">Booking Confirmed!</h2>
+                        <p style="color: white; margin-bottom: 1rem;">Thank you ${booking.name}! Your booking for ${booking.eventType} on ${booking.date} has been confirmed.</p>
+                        <p style="color: #ff6b35; font-weight: bold; margin-bottom: 2rem;">Booking ID: #${booking.id}</p>
+                        <button onclick="this.parentElement.parentElement.remove()" style="background: linear-gradient(135deg, #ff6b35, #f7931e); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: bold;">Awesome!</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Real-time clock for events
+        function updateEventCountdown() {
+            const upcomingEvents = bookingData.filter(booking => {
+                const eventDate = new Date(booking.date + ' ' + booking.time);
+                return eventDate > new Date();
+            }).sort((a, b) => new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time));
+
+            if (upcomingEvents.length > 0) {
+                const nextEvent = upcomingEvents[0];
+                const eventDate = new Date(nextEvent.date + ' ' + nextEvent.time);
+                const now = new Date();
+                const timeUntil = eventDate - now;
+
+                if (timeUntil > 0) {
+                    const days = Math.floor(timeUntil / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeUntil % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeUntil % (1000 * 60 * 60)) / (1000 * 60));
+
+                    // You could display this countdown somewhere on the page
+                    console.log(`Next event in: ${days}d ${hours}h ${minutes}m`);
+                }
+            }
+        }
+
+        // Update countdown every minute
+        setInterval(updateEventCountdown, 60000);
+
+        // Advanced hover effects for service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Dynamic background particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 4px;
+                height: 4px;
+                background: linear-gradient(45deg, #ff6b35, #f7931e);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: -1;
+                opacity: 0;
+                animation: particleFloat 4s linear forwards;
+            `;
+            
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 4000);
+        }
+
+        // Add particle animation CSS
+        const particleStyle = document.createElement('style');
+        particleStyle.textContent = `
+            @keyframes particleFloat {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+            
+            .form-group input.valid,
+            .form-group select.valid,
+            .form-group textarea.valid {
+                border-color: #4CAF50;
+                box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+            }
+            
+            .form-group input.invalid,
+            .form-group select.invalid,
+            .form-group textarea.invalid {
+                border-color: #f44336;
+                box-shadow: 0 0 10px rgba(244, 67, 54, 0.3);
+            }
+        `;
+        document.head.appendChild(particleStyle);
+
+        // Create particles periodically
+        setInterval(createParticle, 2000);
+
+        // Enhanced music visualizer
+        function updateVisualizer() {
+            const bars = document.querySelectorAll('.visualizer-bar');
+            bars.forEach((bar, index) => {
+                const height = Math.random() * 30 + 10;
+                bar.style.height = height + 'px';
+            });
+        }
+
+        setInterval(updateVisualizer, 200);
+
+        // API Integration placeholder (for future enhancement)
+        const API_BASE = 'https://api.djAdolph.com'; // Placeholder
+
+        async function submitBookingToAPI(bookingData) {
+            try {
+                // This would be a real API call in production
+                console.log('Booking data ready for API:', bookingData);
+                return { success: true, bookingId: bookingData.id };
+            } catch (error) {
+                console.error('API Error:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Performance optimization - lazy loading for images
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        // Initialize all lazy-loaded images
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // Service worker registration for offline functionality (placeholder)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                console.log('Service Worker support detected - ready for PWA features');
+            });
+        }
+
+        // Analytics tracking (placeholder for real analytics)
+        function trackEvent(category, action, label) {
+            console.log(`Analytics: ${category} - ${action} - ${label}`);
+            // Integration with Google Analytics, Mixpanel, etc. would go here
+        }
+
+        // Track form interactions
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('focus', () => {
+                trackEvent('Form', 'Field Focus', element.name);
+            });
+        });
+
+        // Track navigation clicks
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                trackEvent('Navigation', 'Click', e.target.textContent);
+            });
+        });
+
+        console.log('🎵 DJ Adolph Website Loaded Successfully! 🎵');
+        console.log('Created by: Adolph Henri Atallah');
+        console.log('Features: Responsive Design, Online Booking, Analytics Dashboard, Modern UI/UX');
+    </script>
+</body>
+</html>
